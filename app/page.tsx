@@ -11,7 +11,7 @@ export default function Home() {
           </Link>
         </div>
         <div className="navbar-end">
-          <button className="btn btn-primary">Sign In</button>
+          <button className="btn btn-primary">Sign IIn</button>
           {/* <UserButton /> */}
         </div>
       </div>
