@@ -7,7 +7,7 @@ export default function Home() {
       <div className="navbar bg-base-300 rounded-xl">
         <div className="navbar-start">
           <Link className="link-primary text-4xl" href="/">
-            Igor's Anime List
+            Igor&apos;s Anime List
           </Link>
         </div>
         <div className="navbar-end">
