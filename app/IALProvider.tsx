@@ -1,7 +1,7 @@
 "use client";
 
-import { ClerkProvider } from "@clerk/nextjs";
+import { SessionProvider } from "next-auth/react";
 
 export default function IALProvider({ children }: React.PropsWithChildren) {
-  return <ClerkProvider>{children}</ClerkProvider>;
+  return <SessionProvider>{children}</SessionProvider>;
 }

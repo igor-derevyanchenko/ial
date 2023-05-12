@@ -1,6 +1,6 @@
 import "./globals.css";
 import { Montserrat } from "next/font/google";
-import { ClerkProvider } from "@clerk/nextjs";
+import IALProvider from "./IALProvider";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -15,10 +15,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
+    <IALProvider>
       <html lang="en" data-theme="dracula">
         <body className={montserrat.className}>{children}</body>
       </html>
-    </ClerkProvider>
+    </IALProvider>
   );
 }
