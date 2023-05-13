@@ -21,28 +21,5 @@ export default async function AniGrid({ searchParams }: homeProps) {
     .then((res) => res.json())
     .then((parsedRes) => parsedRes.data);
 
-  return (
-    <div className="grid ani-grid gap-4 justify-center mt-4">
-      {aniList.map((item: any, index: number) => {
-        const anime = item.node;
-
-        return (
-          <Link
-            className="relative"
-            key={`anime-${index}`}
-            href={`/anime/${anime.id}`}
-          >
-            <img
-              className="rounded-xl w-[400px] h-[600px]"
-              src={anime.main_picture.large}
-              alt={`${anime.title} banner`}
-            />
-            <div className="absolute rounded-xl inset-0 flex justify-center items-center opacity-0 text-4xl text-secondary text-center transition duration-300 hover:bg-base-300 hover:bg-opacity-90 hover:opacity-100">
-              {anime.title}
-            </div>
-          </Link>
-        );
-      })}
-    </div>
-  );
+  return <div>hello</div>;
 }
