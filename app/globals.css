@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.ani-grid {
+  grid-template-columns: repeat(auto-fill, 400px);
+}
