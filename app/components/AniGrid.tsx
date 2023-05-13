@@ -26,7 +26,7 @@ export default async function AniGrid({ searchParams }: homeProps) {
       {aniList.map((item: any, index: number) => {
         const anime = item.node;
 
-        return <div>{anime.title}</div>;
+        return <div key={index}>{anime.title}</div>;
       })}
     </div>
   );
