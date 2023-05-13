@@ -10,6 +10,7 @@ export default async function AniGrid({ searchParams }: homeProps) {
   const aniList = await fetch(
     `https://api.myanimelist.net/v2/anime/ranking?ranking_type=${filter}&limit=${showsPerPage}&offset=${offset}`,
     {
+      cache: "no-store",
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -17,8 +18,14 @@ export default async function AniGrid({ searchParams }: homeProps) {
       },
     }
   )
-    .then((res) => res.json())
-    .then((parsedRes) => parsedRes.data);
+    .then((res) => {
+      console.log("res: ", res);
+      return res.json();
+    })
+    .then((parsedRes) => {
+      console.log(parsedRes);
+      return parsedRes.data;
+    });
 
   return (
     <div className="grid ani-grid gap-4 justify-center mt-4">
