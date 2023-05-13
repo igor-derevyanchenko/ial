@@ -8,6 +8,7 @@ export default async function Home({ searchParams }: homeProps) {
   return (
     <>
       <NavBar />
+      <FilterBar searchParams={searchParams} />
     </>
   );
 }
