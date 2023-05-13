@@ -18,14 +18,8 @@ export default async function AniGrid({ searchParams }: homeProps) {
       },
     }
   )
-    .then((res) => {
-      console.log("res: ", res);
-      return res.json();
-    })
-    .then((parsedRes) => {
-      console.log(parsedRes);
-      return parsedRes.data;
-    });
+    .then((res) => res.json())
+    .then((parsedRes) => parsedRes.data);
 
   return (
     <div className="grid ani-grid gap-4 justify-center mt-4">
