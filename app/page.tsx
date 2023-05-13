@@ -1,6 +1,6 @@
 "use client";
 
-import { signIn, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
 export default function Home() {
@@ -8,7 +8,7 @@ export default function Home() {
 
   return (
     <div className="m-2">
-      <div className="navbar bg-secondary rounded-xl">
+      <div className="navbar bg-base-300 rounded-xl">
         <div className="navbar-start">
           <Link className="link-primary text-4xl" href="/">
             Igor&apos;s Anime List
@@ -16,7 +16,12 @@ export default function Home() {
         </div>
         <div className="navbar-end">
           {authenticated ? (
-            <button className="btn btn-primary">Profile</button>
+            <div className="flex gap-1">
+              <button className="btn btn-primary">Profile</button>
+              <button className="btn btn-primary" onClick={() => signOut()}>
+                Sign out
+              </button>
+            </div>
           ) : (
             <button className="btn btn-primary" onClick={() => signIn()}>
               Sign In
