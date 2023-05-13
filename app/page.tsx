@@ -9,6 +9,8 @@ export default async function Home({ searchParams }: homeProps) {
     <>
       <NavBar />
       <FilterBar searchParams={searchParams} />
+      {/* @ts-expect-error Server Component */}
+      <AniGrid searchParams={searchParams} />
     </>
   );
 }
