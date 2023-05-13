@@ -21,5 +21,13 @@ export default async function AniGrid({ searchParams }: homeProps) {
     .then((res) => res.json())
     .then((parsedRes) => parsedRes.data);
 
-  return <div>hello</div>;
+  return (
+    <div className="grid ani-grid gap-4 justify-center mt-4">
+      {aniList.map((item: any, index: number) => {
+        const anime = item.node;
+
+        return <div>{anime.title}</div>;
+      })}
+    </div>
+  );
 }
