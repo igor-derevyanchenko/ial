@@ -1,13 +1,24 @@
-import { homeProps } from "../types";
+import { ProcessedProps } from "../types";
 import Link from "next/link";
 import { showsPerPage } from "../constants";
 
-export default async function AniGrid({ searchParams }: homeProps) {
-  const filter = searchParams.filter ?? "all";
-  const page = Number(searchParams.page ?? 1);
-  const offset = (page - 1) * showsPerPage;
+type Anime = {
+  node: {
+    id: string;
+    title: string;
+    main_picture: {
+      large: string;
+      medium: string;
+    };
+  };
+  ranking: { rank: string };
+};
 
-  const aniList = await fetch(
+export default async function AniGrid({ searchParams }: ProcessedProps) {
+  const { filter, page } = searchParams;
+  const offset: number = (page - 1) * showsPerPage;
+
+  const aniList: Anime[] = await fetch(
     `https://api.myanimelist.net/v2/anime/ranking?ranking_type=${filter}&limit=${showsPerPage}&offset=${offset}`,
     {
       cache: "no-store",
@@ -21,9 +32,11 @@ export default async function AniGrid({ searchParams }: homeProps) {
     .then((res) => res.json())
     .then((parsedRes) => parsedRes.data);
 
+  console.log(aniList);
+
   return (
     <div className="grid ani-grid gap-4 justify-center mt-4">
-      {aniList.map((item: any, index: number) => {
+      {aniList.map((item, index) => {
         const anime = item.node;
 
         return (

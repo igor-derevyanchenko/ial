@@ -1,10 +1,9 @@
 import Link from "next/link";
-import { homeProps } from "../types";
+import { ProcessedProps } from "../types";
 const FILTERS = ["All", "Airing", "Upcoming", "TV", "OVA", "Movie", "Special"];
 
-export default function FilterBar({ searchParams }: homeProps) {
-  const filter = searchParams.filter ?? "all";
-  const page = Number(searchParams.page ?? 1);
+export default function FilterBar({ searchParams }: ProcessedProps) {
+  const { filter, page } = searchParams;
 
   return (
     <>

@@ -4,7 +4,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
 export default function NavBar() {
-  const authenticated = useSession().status === "authenticated";
+  const authenticated: boolean = useSession().status === "authenticated";
 
   return (
     <div className="m-2">

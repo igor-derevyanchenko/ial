@@ -1,18 +1,24 @@
-import { homeProps } from "../types";
-import Link from "next/link";
+"use client";
+import { useRouter } from "next/navigation";
+import { ProcessedProps } from "../types";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 
-export default function PagingButtons({ searchParams }: homeProps) {
-  const filter = searchParams.filter ?? "all";
-  const page = Number(searchParams.page ?? 1);
-  const offset = page < 6 ? page - 1 : 5;
-  let buttons = [];
+export default function PagingButtons({ searchParams }: ProcessedProps) {
+  const router: AppRouterInstance = useRouter();
+  const { filter, page } = searchParams;
+  const offset: number = page < 6 ? page - 1 : 5;
+  let buttons: JSX.Element[] = [];
 
   for (let i = 0; i <= 12; i++) {
     let buttonText: string | number = i;
-    let className = "btn";
-    let destinationPage;
+    let className: string = "btn";
+    let destinationPage: number;
 
     if (i === 0) {
+      if (page === 1) {
+        continue;
+      }
+
       buttonText = "<";
       destinationPage = page - 1;
     } else if (i === 12) {
@@ -28,12 +34,17 @@ export default function PagingButtons({ searchParams }: homeProps) {
     }
 
     let button = (
-      <Link
+      <button
         className={className}
-        href={`/?filter=${filter}&page=${destinationPage}`}
+        key={`page-${i}`}
+        onClick={() => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+
+          router.push(`/?filter=${filter}&page=${destinationPage}`);
+        }}
       >
         {buttonText}
-      </Link>
+      </button>
     );
     buttons.push(button);
   }
