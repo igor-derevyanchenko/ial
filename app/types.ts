@@ -5,9 +5,15 @@ export type HomeProps = {
   };
 };
 
-export type ProcessedProps = {
-  searchParams: {
+export interface ProcessedProps {
+  processedParams: {
     filter: string;
     page: number;
   };
-};
+  action: "ranking" | "search";
+}
+
+export interface Paging {
+  previous: string | undefined;
+  next: string | undefined;
+}

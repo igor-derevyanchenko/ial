@@ -1,1 +1,1 @@
-export const showsPerPage = 10;
+export const SHOWS_PER_PAGE = 21;

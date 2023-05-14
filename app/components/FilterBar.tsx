@@ -1,9 +1,15 @@
 import Link from "next/link";
-import { ProcessedProps } from "../types";
 const FILTERS = ["All", "Airing", "Upcoming", "TV", "OVA", "Movie", "Special"];
 
-export default function FilterBar({ searchParams }: ProcessedProps) {
-  const { filter, page } = searchParams;
+type FilterProps = {
+  processedParams: {
+    filter: string;
+    page: number;
+  };
+};
+
+export default function FilterBar({ processedParams }: FilterProps) {
+  const { filter, page } = processedParams;
 
   return (
     <>

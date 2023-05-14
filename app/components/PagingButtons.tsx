@@ -1,53 +1,59 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { ProcessedProps } from "../types";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
+import { ProcessedProps, Paging } from "../types";
 
-export default function PagingButtons({ searchParams }: ProcessedProps) {
-  const router: AppRouterInstance = useRouter();
-  const { filter, page } = searchParams;
-  const offset: number = page < 6 ? page - 1 : 5;
-  let buttons: JSX.Element[] = [];
+interface PagingProps extends ProcessedProps {
+  paging?: Paging;
+}
 
-  for (let i = 0; i <= 12; i++) {
-    let buttonText: string | number = i;
-    let className: string = "btn";
-    let destinationPage: number;
+export default function PagingButtons({
+  processedParams,
+  action,
+  paging,
+}: PagingProps) {
+  console.log(paging);
+  const router = useRouter();
+  const { filter, page } = processedParams;
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    let url: string = "/";
 
-    if (i === 0) {
-      if (page === 1) {
-        continue;
-      }
-
-      buttonText = "<";
-      destinationPage = page - 1;
-    } else if (i === 12) {
-      buttonText = ">";
-      destinationPage = page + 1;
-    } else {
-      buttonText = i - 1 + page - offset;
-      destinationPage = buttonText;
-
-      if (buttonText === page) {
-        className += " btn-active";
-      }
+    if (action === "search") {
+      url += "search";
     }
 
-    let button = (
+    let destinationPage: number = page;
+
+    if (e.currentTarget.id === "prev") {
+      destinationPage = page - 1;
+    } else if (e.currentTarget.id === "next") {
+      destinationPage = page + 1;
+    }
+
+    router.push(`${url}?filter=${filter}&page=${destinationPage}`);
+  };
+
+  return (
+    <div className="btn-group flex justify-center m-4">
       <button
-        className={className}
-        key={`page-${i}`}
-        onClick={() => {
-          window.scrollTo({ top: 0, behavior: "smooth" });
-
-          router.push(`/?filter=${filter}&page=${destinationPage}`);
-        }}
+        className="btn"
+        disabled={paging?.previous ? false : true}
+        id="prev"
+        onClick={handleClick}
       >
-        {buttonText}
+        &lt;&lt;
       </button>
-    );
-    buttons.push(button);
-  }
-
-  return <div className="btn-group flex justify-center m-4">{buttons}</div>;
+      <button className="btn pointer-events-none" onClick={handleClick}>
+        page {page}
+      </button>
+      <button
+        className="btn"
+        disabled={paging?.next ? false : true}
+        id="next"
+        onClick={handleClick}
+      >
+        &gt;&gt;
+      </button>
+    </div>
+  );
 }
