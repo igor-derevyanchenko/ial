@@ -26,7 +26,6 @@ export default async function AniGrid({
   processedParams,
   action,
 }: ProcessedProps) {
-  console.log(processedParams);
   const { filter, page } = processedParams;
   const offset: number = (page - 1) * SHOWS_PER_PAGE;
 

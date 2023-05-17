@@ -11,7 +11,6 @@ export default function PagingButtons({
   action,
   paging,
 }: PagingProps) {
-  console.log(paging);
   const router = useRouter();
   const { filter, page } = processedParams;
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
